@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="补一格：AI 辅助开发的个人技术样品。使用自行提供的同名歌词与封面，为本地 MP3 补齐缺项，保持原文件不变。">
+  <title>补一格 · 本地 MP3 歌词与封面补齐</title>
+  <style>
+    :root { color-scheme: light; --ink:#203e33; --muted:#637267; --paper:#f7f8f2; --line:#dde3d8; --accent:#edf4bc; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.75; }
+    a { color:inherit; text-underline-offset:4px; }
+    a:focus-visible { outline:3px solid #677b31; outline-offset:5px; }
+    .wrap { width:min(1080px,calc(100% - 48px)); margin-inline:auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:25px 0; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:12px; font-size:22px; font-weight:750; letter-spacing:1px; }
+    .mark { display:flex; align-items:center; justify-content:center; gap:4px; width:36px; height:36px; border-radius:11px; background:var(--ink); }
+    .mark i { width:4px; height:15px; border-radius:4px; background:var(--accent); }
+    .mark i:nth-child(2) { height:24px; }
+    .tag { color:var(--muted); font-size:13px; }
+    .hero { padding:76px 0 49px; max-width:810px; }
+    .eyebrow { margin:0 0 17px; color:#6c7e4a; font-size:13px; font-weight:700; letter-spacing:2px; }
+    h1 { margin:0 0 24px; font-size:clamp(32px,5.4vw,57px); line-height:1.22; letter-spacing:-1px; }
+    .lead { max-width:680px; margin:0; color:var(--muted); font-size:17px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:29px; }
+    .button { display:inline-flex; justify-content:center; align-items:center; min-height:48px; padding:11px 20px; border:1px solid var(--ink); border-radius:10px; text-decoration:none; font-size:15px; font-weight:650; }
+    .button.primary { color:white; background:var(--ink); }
+    .button.secondary { border-color:#dce5b7; background:var(--accent); }
+    .button:hover { filter:brightness(.96); }
+    .note { margin:14px 0 0; color:var(--muted); font-size:13px; }
+    .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:0 0 55px; }
+    .fact { padding:23px 24px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .fact strong { display:block; margin-bottom:5px; font-size:20px; }
+    .fact p { margin:0; color:var(--muted); font-size:14px; }
+    section { margin-bottom:54px; }
+    h2 { margin:0 0 12px; font-size:26px; line-height:1.4; }
+    .section-intro { margin:0 0 23px; color:var(--muted); }
+    figure { margin:0; padding:12px; border:1px solid var(--line); border-radius:17px; background:white; }
+    figure img { display:block; width:100%; height:auto; border-radius:8px; }
+    figcaption { padding:12px 8px 3px; color:var(--muted); font-size:13px; text-align:center; }
+    .details { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding-top:10px; }
+    .details article { border-top:1px solid var(--line); padding-top:24px; }
+    .details h2 { font-size:22px; }
+    .details p { margin:0 0 12px; color:var(--muted); font-size:15px; }
+    .details ul { padding-left:20px; margin:0; color:var(--muted); font-size:15px; }
+    .details li { margin-bottom:8px; }
+    code { padding:2px 5px; border-radius:4px; background:#edf0e7; font-size:.9em; overflow-wrap:anywhere; }
+    footer { padding:24px 0 35px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+    @media (max-width:640px) {
+      .wrap { width:calc(100% - 36px); }
+      header { align-items:flex-start; padding:19px 0; gap:12px; }
+      .tag { max-width:116px; text-align:right; font-size:12px; }
+      .hero { padding:43px 0 31px; }
+      h1 { letter-spacing:0; }
+      .lead { font-size:16px; }
+      .actions { flex-direction:column; }
+      .button { width:100%; padding-inline:12px; }
+      .facts { grid-template-columns:1fr; gap:10px; margin-bottom:38px; }
+      .fact { padding:17px 19px; }
+      .fact strong { font-size:18px; }
+      section { margin-bottom:37px; }
+      h2 { font-size:23px; }
+      figure { padding:6px; border-radius:12px; }
+      .details { grid-template-columns:1fr; gap:23px; }
+      figcaption { font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>补一格</div>
+      <span class="tag">AI 辅助开发 · 个人技术样品</span>
+    </header>
+    <main>
+      <div class="hero">
+        <p class="eyebrow">本地 MP3 · 歌词与封面补齐</p>
+        <h1>补上缺少的那一格，<br>留住原来的音乐信息。</h1>
+        <p class="lead">用你自行提供的同名歌词和封面，补齐 MP3 中缺少的内容。已有信息保留，处理后生成新副本，原文件保持不变。</p>
+        <div class="actions">
+          <a class="button primary" href="https://afdian.com/a/ai-data-auto" target="_blank" rel="noopener noreferrer">查看项目主页</a>
+          <a class="button secondary" href="https://afdian.com/item/f8ddab72c08911f1b12152540025c377" target="_blank" rel="noopener noreferrer">查看商品说明（暂未开放购买）</a>
+        </div>
+        <p class="note">这是现有技术样品的公开展示页。商品暂未开放购买。</p>
+      </div>
+      <div class="facts" aria-label="样品主要特点">
+        <div class="fact"><strong>只补缺少的内容</strong><p>已有歌词、封面会保留，音频数据原样复制。</p></div>
+        <div class="fact"><strong>原文件保持不变</strong><p>生成新副本供下载，也可将成功生成的副本打包。</p></div>
+        <div class="fact"><strong>文件在本机处理</strong><p>不上传文件，不联网搜索歌词或封面。</p></div>
+      </div>
+      <section aria-labelledby="preview-title">
+        <h2 id="preview-title">实际样品，合成演示</h2>
+        <p class="section-intro">截图展示了生成副本、保留已有内容和跳过不支持文件三种结果。</p>
+        <figure>
+          <img src="demo-preview.jpg" width="1280" height="1550" alt="补一格样品运行结果：合成演示中，一首生成副本、一首保留已有内容、一首因不支持的标签被跳过。">
+          <figcaption>实际样品界面截图 · 440 Hz 合成短音、几何封面、演示歌词 · 未使用真实歌曲或用户文件</figcaption>
+        </figure>
+      </section>
+      <section class="details" aria-label="使用方式和支持范围">
+        <article>
+          <h2>准备同名文件即可配对</h2>
+          <p>自行准备 MP3、UTF-8 格式的 LRC，以及 JPG 或 PNG 封面。除扩展名外，文件名需相同。</p>
+          <p><code>歌曲.mp3</code> + <code>歌曲.lrc</code> + <code>歌曲.jpg</code></p>
+          <p>样品不会联网寻找素材。LRC 按文本写入，不保证滚动歌词或不同播放器中的显示效果。</p>
+        </article>
+        <article>
+          <h2>支持范围与当前验证</h2>
+          <ul>
+            <li>每批最多 <strong>40 首 MP3、120 MB</strong>，单个 MP3 最多 <strong>80 MB</strong>。</li>
+            <li>支持普通 ID3v2.3.0 / 2.4.0 标签；不支持或异常的文件会被跳过，不承担损坏音频修复。</li>
+            <li>工具样品已在现代浏览器的<strong>本地静态服务器模式</strong>验证。</li>
+            <li>解压后直接双击打开的方式<strong>尚未完成运行时验证</strong>。</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <footer>补一格 · AI 辅助开发的个人技术样品。本页用于公开展示，文件处理功能以样品说明为准。</footer>
+  </div>
+</body>
+</html>
